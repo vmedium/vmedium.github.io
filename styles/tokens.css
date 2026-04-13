@@ -66,6 +66,7 @@
   --radius-full:   9999px;
 
   /* ─── Motion ──────────────────────────────────────────────────────────── */
+  /* JS mirror of these values: lib/motion.ts — keep in sync */
   /* Easing */
   --ease-move:        cubic-bezier(0.3, 0, 0.05, 1); /* spatial: translate/scale */
   --ease-fade:        linear;                          /* opacity, color, border */
