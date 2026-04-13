@@ -57,11 +57,13 @@ Adding content = drop a `.md` file + push. GitHub Actions deploys automatically.
 | File | Purpose |
 |---|---|
 | `styles/tokens.css` | All design tokens — edit here first |
-| `styles/globals.css` | Reset + utilities: `.container`, `.label`, `.mono`, stub page classes |
+| `styles/globals.css` | Reset + utilities: `.container`, `.label`, `.mono`, stub page classes, `.page-zone` animation utility |
 | `components/ui/ProjectCard.tsx` | Card component — `data-span` attribute, grid overlay on hover |
 | `components/ui/ProjectGrid.tsx` | 12-col grid. Brockmann span sequence: `[6,3,3,4,8,6,6,4,4,4,12,3,3,6]` |
 | `components/ui/Prose.tsx` | Markdown body renderer (`react-markdown` + `remark-gfm`) |
 | `components/ui/DebugPanel.tsx` | Floating GRID button (fixed top-right, z-9999). Always-on ghost grid (dashed gutter hairlines). GRID toggle shows measurement panel + forces card overlays blue via `data-debug` on `<html>` |
+| `components/ui/TransitionProvider.tsx` | Client component. Intercepts all internal link clicks via capture-phase listener, triggers 200ms exit, then `router.push`. Provides `isExiting` context. |
+| `components/ui/PageTransition.tsx` | Client component. Reads `isExiting` from context. Holds old children in a ref during exit so they don't flash. Switches `.exiting` / `.entering` CSS class on a keyed wrapper div. |
 | `components/layout/Nav.tsx` | Fixed 48px top bar. Logo left, nav links right, mode toggle |
 | `components/layout/Footer.tsx` | Copyright + social links — update URLs here |
 | `lib/content.ts` | Reads work/projects/experiments markdown |
@@ -79,6 +81,24 @@ No real images yet. Placeholders are `--color-surface` blocks. Card aspect ratio
 - **Why `vmedium.github.io` works without a basePath:** GitHub Pages serves repos named `<username>.github.io` at the root URL (`https://vmedium.github.io/`). Any other repo name would need `basePath: '/<reponame>'` in `next.config.ts` or all links/assets break. Do not rename the repo.
 - Set `PRIVATE_PASSWORD` as a GitHub Actions secret for the `/private` route
 
+## Motion system
+
+### Page transitions
+- `TransitionProvider` wraps the whole app inside `ThemeProvider` in `app/layout.tsx`
+- Click interception uses `{ capture: true }` — fires before React/Next.js Link processes the event
+- Exit: 200ms (`--duration-page-exit`). Enter: 400ms (`--duration-page-enter`)
+- `.exiting *` has `transition: none !important` to freeze hover states during exit
+- **Known issue / pending**: zone cascade (staggered element entrance) was attempted but caused a flash. Root cause: React remounts children when the wrapper key switches (`pathname` → `'exit'`), restarting `.page-zone` CSS animations from `opacity: 0` while `.exiting` fades to `opacity: 0` simultaneously. Fix: add `animation: none !important` to `.exiting *`. Not yet implemented.
+
+### `.page-zone` utility (`styles/globals.css`)
+Staggered entrance animation for structural page sections. Not yet applied to any pages (pending the fix above).
+- Apply `className="page-zone"` to top-level structural divs — siblings get staggered delays via `nth-child`
+- Stagger sequence: 50 / 90 / 120 / 140ms (`--stagger-1` → `--stagger-4`)
+- `animation-fill-mode: both` holds `opacity: 0` during delay
+
+### Icon tokens (`styles/tokens.css`)
+`--icon-size-xs/sm/base`, `--icon-stroke`, `--icon-stroke-thin`. `lucide-react` installed but not wired to any components yet.
+
 ## What's stubbed / not yet built
 - Store (just "Coming Soon")
 - Real images
@@ -90,7 +110,7 @@ No real images yet. Placeholders are `--color-surface` blocks. Card aspect ratio
 ## Hard rules
 - Tokens only — no hardcoded values
 - CSS Modules only — no additions to globals except established utilities
-- No new dependencies without reason. Current: `gray-matter`, `react-markdown`, `remark-gfm`
+- No new dependencies without reason. Current: `gray-matter`, `react-markdown`, `remark-gfm`, `lucide-react`
 - Content in `content/` only — never hardcoded in components
 - Grid spans must be 3, 4, 6, 8, or 12
 - Commit after every completed task — before starting the next one
