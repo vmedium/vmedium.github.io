@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Zone } from "@/components/ui/Zone";
 import styles from "./page.module.css";
 
 const SESSION_KEY = "private_auth";
@@ -46,6 +47,7 @@ export function PrivateGate() {
   if (authed) {
     return (
       <div className="container">
+        <Zone index={1}>
         <div className={styles.content}>
           <header className={styles.header}>
             <span className={styles.label}>Private</span>
@@ -67,12 +69,14 @@ export function PrivateGate() {
             Sign out
           </button>
         </div>
+        </Zone>
       </div>
     );
   }
 
   return (
     <div className="container">
+      <Zone index={1}>
       <div className={styles.gate}>
         <header className={styles.gateHeader}>
           <span className={styles.label}>Private</span>
@@ -107,6 +111,7 @@ export function PrivateGate() {
           )}
         </form>
       </div>
+      </Zone>
     </div>
   );
 }

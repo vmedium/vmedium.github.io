@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getPost, getPosts } from "@/lib/blog";
 import { Prose } from "@/components/ui/Prose";
+import { Zone } from "@/components/ui/Zone";
 import styles from "./page.module.css";
 
 interface Props {
@@ -29,34 +30,40 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className={styles.article}>
       <div className="container">
-        <nav className={styles.breadcrumb}>
-          <Link href="/blog">Writing</Link>
-          <span aria-hidden="true">/</span>
-          <span>{post.title}</span>
-        </nav>
+        <Zone index={1}>
+          <nav className={styles.breadcrumb}>
+            <Link href="/blog">Writing</Link>
+            <span aria-hidden="true">/</span>
+            <span>{post.title}</span>
+          </nav>
+        </Zone>
 
-        <header className={styles.header}>
-          <div className={styles.meta}>
-            <time className={styles.date} dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-            <div className={styles.tags}>
-              {post.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>{tag}</span>
-              ))}
+        <Zone index={2}>
+          <header className={styles.header}>
+            <div className={styles.meta}>
+              <time className={styles.date} dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              <div className={styles.tags}>
+                {post.tags.map((tag) => (
+                  <span key={tag} className={styles.tag}>{tag}</span>
+                ))}
+              </div>
             </div>
-          </div>
-          <h1 className={styles.title}>{post.title}</h1>
-          <p className={styles.description}>{post.description}</p>
-        </header>
+            <h1 className={styles.title}>{post.title}</h1>
+            <p className={styles.description}>{post.description}</p>
+          </header>
+        </Zone>
 
-        <div className={styles.body}>
-          <Prose content={content} />
-        </div>
+        <Zone index={3}>
+          <div className={styles.body}>
+            <Prose content={content} />
+          </div>
+        </Zone>
       </div>
     </article>
   );

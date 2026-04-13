@@ -1,4 +1,8 @@
+'use client';
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import { itemVariants } from "./ProjectGrid";
+import { ease, duration } from "@/lib/motion";
 import styles from "./ProjectCard.module.css";
 
 export type ProjectSpan = 3 | 4 | 6 | 8 | 12;
@@ -20,20 +24,30 @@ interface ProjectCardProps {
   priority?: boolean;
 }
 
+const MotionLink = motion.create(Link);
+
 export function ProjectCard({ project, span = 4, priority }: ProjectCardProps) {
   const href = `/${project.section}/${project.slug}`;
+  const reduced = useReducedMotion();
 
   return (
-    <Link
+    <MotionLink
       href={href}
       className={styles.card}
       data-span={span}
       style={{ "--card-span": span } as React.CSSProperties}
+      variants={itemVariants}
     >
-      {/* Placeholder image */}
-      <div className={styles.image} aria-hidden="true">
+      {/* Image — scales on hover within the clipped card boundary */}
+      <motion.div
+        className={styles.image}
+        aria-hidden="true"
+        whileHover={reduced ? {} : { scale: 1.04 }}
+        whileTap={reduced ? {} : { scale: 0.98 }}
+        transition={{ duration: duration.fade, ease: ease.move }}
+      >
         <span className={styles.imagePlaceholder} />
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className={styles.content}>
@@ -63,6 +77,6 @@ export function ProjectCard({ project, span = 4, priority }: ProjectCardProps) {
           <div key={i} className={i % 2 === 0 ? styles.gridCol : styles.gridGutter} />
         ))}
       </div>
-    </Link>
+    </MotionLink>
   );
 }

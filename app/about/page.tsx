@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Zone } from "@/components/ui/Zone";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export default function AboutPage() {
         <div className={styles.grid}>
 
           {/* Bio column */}
-          <div className={styles.bio}>
+          <Zone index={1} className={styles.bio}>
             <header className={styles.header}>
               <span className={styles.label}>About</span>
               <h1 className={styles.name}>JT DiMartile</h1>
@@ -45,10 +46,10 @@ export default function AboutPage() {
                 hello@vmedium.xyz
               </a>
             </div>
-          </div>
+          </Zone>
 
           {/* Info columns */}
-          <aside className={styles.aside}>
+          <Zone index={2} className={styles.aside}>
             <dl className={styles.info}>
               <div className={styles.infoGroup}>
                 <dt className={styles.infoLabel}>Discipline</dt>
@@ -88,7 +89,7 @@ export default function AboutPage() {
                 </dd>
               </div>
             </dl>
-          </aside>
+          </Zone>
 
         </div>
       </div>

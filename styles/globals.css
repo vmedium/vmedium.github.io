@@ -142,23 +142,9 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 40ch;
 }
 
-/* ─── Page enter animation ───────────────────────────────────────────────── */
-@keyframes page-enter {
-  from { opacity: 0; transform: translateY(var(--space-5)); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* .page-zone — apply to top-level content sections for staggered cascade */
-.page-zone {
-  animation: page-enter var(--duration-move-lg) var(--ease-move) both;
-}
-.page-zone:nth-child(1) { animation-delay: var(--stagger-1); }
-.page-zone:nth-child(2) { animation-delay: var(--stagger-2); }
-.page-zone:nth-child(3) { animation-delay: var(--stagger-3); }
-.page-zone:nth-child(4) { animation-delay: var(--stagger-4); }
-
 /* ─── Reduced motion ─────────────────────────────────────────────────────── */
+/* Motion animations (page transitions, Zone stagger, card hover) are handled
+   by Motion's useReducedMotion() hook. This rule covers CSS-only transitions. */
 @media (prefers-reduced-motion: reduce) {
-  .page-zone { animation: none; }
   * { transition-duration: var(--duration-fast) !important; }
 }
