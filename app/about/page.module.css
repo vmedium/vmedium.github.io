@@ -1,12 +1,17 @@
 .page {
-  padding-block: var(--space-6) var(--space-8);
+  padding-block-end: var(--space-6);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--space-7);
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gutter);
   align-items: start;
+  padding-block-start: var(--space-5);
+}
+
+.bio {
+  grid-column: span 8;
 }
 
 /* ─── Bio ──────────────────────────────────────────────────────────────── */
@@ -55,8 +60,8 @@
   color: var(--color-text-muted);
   border-bottom: 1px solid var(--color-border);
   padding-block-end: 2px;
-  transition: color var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade),
+              border-color var(--duration-fast) var(--ease-fade);
 }
 
 .contactLink:hover {
@@ -66,6 +71,7 @@
 
 /* ─── Aside ────────────────────────────────────────────────────────────── */
 .aside {
+  grid-column: span 4;
   border-top: 1px solid var(--color-border);
   padding-block-start: var(--space-4);
 }
@@ -97,7 +103,7 @@
 }
 
 .info dd a {
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade);
 }
 
 .info dd a:hover {

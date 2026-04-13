@@ -101,6 +101,8 @@ function measure(): Measurement[] {
 export function DebugPanel() {
   const [open, setOpen] = useState(false);
   const [measurements, setMeasurements] = useState<Measurement[]>([]);
+  const [ghostOpacity, setGhostOpacity] = useState(5);
+  const [overlayOpacity, setOverlayOpacity] = useState(100);
   const rafRef = useRef<number | null>(null);
 
   const refresh = useCallback(() => {
@@ -109,6 +111,20 @@ export function DebugPanel() {
       setMeasurements(measure());
     });
   }, []);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--debug-ghost-opacity",
+      String(ghostOpacity / 100)
+    );
+  }, [ghostOpacity]);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--debug-overlay-opacity",
+      String(overlayOpacity / 100)
+    );
+  }, [overlayOpacity]);
 
   useEffect(() => {
     if (open) {
@@ -159,6 +175,37 @@ export function DebugPanel() {
             <button className={styles.refreshBtn} onClick={refresh}>
               Refresh
             </button>
+          </div>
+
+          <div className={styles.sliders}>
+            <div className={styles.sliderRow}>
+              <div className={styles.sliderLabel}>
+                <span>Background grid</span>
+                <span className={styles.sliderValue}>{ghostOpacity}%</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={ghostOpacity}
+                onChange={(e) => setGhostOpacity(Number(e.target.value))}
+                className={styles.sliderInput}
+              />
+            </div>
+            <div className={styles.sliderRow}>
+              <div className={styles.sliderLabel}>
+                <span>Card overlay grid</span>
+                <span className={styles.sliderValue}>{overlayOpacity}%</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={overlayOpacity}
+                onChange={(e) => setOverlayOpacity(Number(e.target.value))}
+                className={styles.sliderInput}
+              />
+            </div>
           </div>
 
           <div className={styles.table}>

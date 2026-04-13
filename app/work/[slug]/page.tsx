@@ -53,6 +53,7 @@ export default async function WorkProjectPage({ params }: Props) {
         </header>
 
         {/* Hero placeholder */}
+        {/* Hero placeholder */}
         <div className={styles.hero} aria-hidden="true" />
 
         <div className={styles.body}>

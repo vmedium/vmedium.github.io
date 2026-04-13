@@ -93,3 +93,4 @@ No real images yet. Placeholders are `--color-surface` blocks. Card aspect ratio
 - No new dependencies without reason. Current: `gray-matter`, `react-markdown`, `remark-gfm`
 - Content in `content/` only — never hardcoded in components
 - Grid spans must be 3, 4, 6, 8, or 12
+- Commit after every completed task — before starting the next one

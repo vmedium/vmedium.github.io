@@ -13,9 +13,9 @@
   border-radius: var(--radius-sm);
   padding: 3px 8px;
   cursor: pointer;
-  transition: color var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out),
-              background var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade),
+              border-color var(--duration-fast) var(--ease-fade),
+              background var(--duration-fast) var(--ease-fade);
 }
 
 .trigger:hover {
@@ -40,6 +40,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  opacity: var(--debug-ghost-opacity, 0.05);
 
   max-width: var(--grid-max-width);
   margin-inline: auto;
@@ -49,24 +50,75 @@
   grid-template-columns: repeat(11, 1fr var(--grid-gutter)) 1fr;
 }
 
-.ghostCol {
-  background: color-mix(in srgb, var(--color-text) 3%, transparent);
-  height: 100%;
-}
-
 /* Dashed hairline at center of each gutter zone — the true column divider */
 .ghostGutter {
   height: 100%;
   background-image: repeating-linear-gradient(
     to bottom,
-    color-mix(in srgb, var(--color-text) 5%, transparent) 0px,
-    color-mix(in srgb, var(--color-text) 5%, transparent) 4px,
+    var(--color-text) 0px,
+    var(--color-text) 4px,
     transparent 4px,
     transparent 8px
   );
   background-size: 1px 8px;
   background-position: 50% 0;
   background-repeat: no-repeat repeat;
+}
+
+/* ─── Grid sliders ───────────────────────────────────────────────────────── */
+.sliders {
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sliderRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sliderLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.sliderValue {
+  color: var(--color-text-subtle);
+}
+
+.sliderInput {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 2px;
+  background: var(--color-border-strong);
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+}
+
+.sliderInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-text);
+  cursor: pointer;
+}
+
+.sliderInput::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-text);
+  cursor: pointer;
+  border: none;
 }
 
 
@@ -116,8 +168,8 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   background: transparent;
-  transition: color var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade),
+              border-color var(--duration-fast) var(--ease-fade);
 }
 
 .refreshBtn:hover {
@@ -136,7 +188,7 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding: 3px var(--space-3);
-  transition: background var(--duration-fast) var(--ease-out);
+  transition: background var(--duration-fast) var(--ease-fade);
 }
 
 .row:hover {

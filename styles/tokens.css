@@ -66,11 +66,33 @@
   --radius-full:   9999px;
 
   /* ─── Motion ──────────────────────────────────────────────────────────── */
-  --duration-fast:   100ms;
-  --duration-base:   200ms;
-  --duration-slow:   400ms;
-  --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out:     cubic-bezier(0.45, 0, 0.55, 1);
+  /* Easing */
+  --ease-move:        cubic-bezier(0.3, 0, 0.05, 1); /* spatial: translate/scale */
+  --ease-fade:        linear;                          /* opacity, color, border */
+
+  /* Durations */
+  --duration-fast:    100ms;   /* micro hover states */
+  --duration-fade:    300ms;   /* opacity / color fades */
+  --duration-move-sm: 250ms;   /* short travel ≤ 16px */
+  --duration-move-md: 350ms;   /* medium travel ~24–48px */
+  --duration-move-lg: 500ms;   /* long travel / page enter */
+
+  /* Page transitions — isolated from component-level durations */
+  --duration-page-exit:  200ms;
+  --duration-page-enter: 400ms;
+
+  /* Stagger delays — cascade (gaps reduce: 50 → 40 → 30 → 20ms) */
+  --stagger-1: 50ms;
+  --stagger-2: 90ms;
+  --stagger-3: 120ms;
+  --stagger-4: 140ms;
+
+  /* ─── Icons ───────────────────────────────────────────────────────────── */
+  --icon-size-xs:     12px;
+  --icon-size-sm:     16px;
+  --icon-size-base:   20px;
+  --icon-stroke:      1.5;   /* Lucide default — geometric/balanced */
+  --icon-stroke-thin: 1;     /* decorative / lighter contexts */
 
   /* ─── Z-index ─────────────────────────────────────────────────────────── */
   --z-base:    0;

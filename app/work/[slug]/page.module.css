@@ -14,7 +14,7 @@
 }
 
 .breadcrumb a {
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade);
 }
 
 .breadcrumb a:hover {

@@ -6,7 +6,7 @@
   padding-block: var(--space-4);
   overflow: hidden;
   cursor: pointer;
-  transition: border-color var(--duration-fast) var(--ease-out);
+  transition: border-color var(--duration-fast) var(--ease-fade);
   grid-column: span var(--card-span, 4);
 }
 
@@ -35,7 +35,7 @@
   width: 100%;
   height: 100%;
   background-color: var(--color-surface);
-  transition: background-color var(--duration-base) var(--ease-out);
+  transition: background-color var(--duration-fade) var(--ease-fade);
 }
 
 /* ─── Content ──────────────────────────────────────────────────────────── */
@@ -58,7 +58,7 @@
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-text-subtle);
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade);
 }
 
 .year {
@@ -66,7 +66,7 @@
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-subtle);
   font-family: var(--font-mono);
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade);
 }
 
 .title {
@@ -75,7 +75,7 @@
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-tight);
   color: var(--color-text);
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade);
 }
 
 /* 12-col hero gets larger title treatment */
@@ -88,12 +88,11 @@
   line-height: var(--leading-normal);
   color: var(--color-text-muted);
   max-width: 55ch;
-  transition: color var(--duration-fast) var(--ease-out);
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity var(--duration-base) var(--ease-out),
-              transform var(--duration-base) var(--ease-out),
-              color var(--duration-fast) var(--ease-out);
+  transition: opacity var(--duration-fade) var(--ease-fade),
+              transform var(--duration-move-sm) var(--ease-move),
+              color var(--duration-fast) var(--ease-fade);
 }
 
 .card:hover .description {
@@ -107,7 +106,7 @@
   gap: var(--space-1);
   margin-block-start: var(--space-1);
   opacity: 0;
-  transition: opacity var(--duration-base) var(--ease-out);
+  transition: opacity var(--duration-fade) var(--ease-fade);
 }
 
 .card:hover .tags {
@@ -120,7 +119,7 @@
   color: var(--color-text-subtle);
   padding: 2px var(--space-2);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-base);
 }
 
 /* ─── Grid overlay — reveals underlying grid on hover ─────────────────── */
@@ -132,7 +131,7 @@
   pointer-events: none;
   z-index: 0;
   opacity: 0;
-  transition: opacity var(--duration-base) var(--ease-out);
+  transition: opacity var(--duration-fade) var(--ease-fade);
 }
 
 .card:hover .gridOverlay {
@@ -140,7 +139,7 @@
 }
 
 :global([data-debug]) .gridOverlay {
-  opacity: 1;
+  opacity: var(--debug-overlay-opacity, 1);
 }
 
 /* Column zones — transparent, content area */

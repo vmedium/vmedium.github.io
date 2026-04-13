@@ -5,10 +5,14 @@
   right: 0;
   z-index: var(--z-nav);
   background-color: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
-  height: 48px;
-  transition: background-color var(--duration-base) var(--ease-out),
-              border-color var(--duration-base) var(--ease-out);
+  border-bottom: 1px solid transparent;
+  height: 64px;
+  transition: background-color var(--duration-fade) var(--ease-fade),
+              border-color var(--duration-fade) var(--ease-fade);
+}
+
+.scrolled {
+  border-bottom-color: var(--color-border);
 }
 
 .nav {
@@ -25,7 +29,7 @@
   color: var(--color-text);
   flex-shrink: 0;
   margin-inline-end: auto;
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-fade);
 }
 
 .logo:hover {
@@ -35,18 +39,25 @@
 .links {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .link {
   font-size: var(--text-base);
   color: var(--color-text-muted);
   letter-spacing: var(--tracking-normal);
-  transition: color var(--duration-fast) var(--ease-out);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-base);
+  transition: color var(--duration-fast) var(--ease-fade),
+              background-color var(--duration-fast) var(--ease-fade);
   white-space: nowrap;
 }
 
-.link:hover,
+.link:hover {
+  color: var(--color-text);
+  background-color: var(--color-bg-subtle);
+}
+
 .link.active {
   color: var(--color-text);
 }
@@ -58,15 +69,17 @@
   color: var(--color-text-subtle);
   padding: var(--space-1) var(--space-2);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  transition: color var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
+  border-radius: var(--radius-base);
+  transition: color var(--duration-fast) var(--ease-fade),
+              border-color var(--duration-fast) var(--ease-fade),
+              background-color var(--duration-fast) var(--ease-fade);
   flex-shrink: 0;
 }
 
 .modeToggle:hover {
   color: var(--color-text);
   border-color: var(--color-border-strong);
+  background-color: var(--color-bg-subtle);
 }
 
 @media (max-width: 768px) {

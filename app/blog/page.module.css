@@ -1,5 +1,16 @@
 .page {
-  padding-block-end: var(--space-8);
+  padding-block-end: var(--space-6);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gutter);
+  padding-block-start: var(--space-5);
+}
+
+.listWrap {
+  grid-column: span 12;
 }
 
 .list {
@@ -11,7 +22,7 @@
   display: block;
   padding-block: var(--space-5);
   border-bottom: 1px solid var(--color-border);
-  transition: border-color var(--duration-fast) var(--ease-out);
+  transition: border-color var(--duration-fast) var(--ease-fade);
 }
 
 .post:hover {
@@ -62,8 +73,8 @@
   max-width: 60ch;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity var(--duration-base) var(--ease-out),
-              transform var(--duration-base) var(--ease-out);
+  transition: opacity var(--duration-fade) var(--ease-fade),
+              transform var(--duration-move-sm) var(--ease-move);
 }
 
 .post:hover .postDescription {

@@ -1,0 +1,29 @@
+@keyframes page-exit {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-5));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exiting {
+  animation: page-exit var(--duration-page-exit) var(--ease-fade) forwards;
+  pointer-events: none;
+}
+
+/* Freeze all child transitions so hover-revealed content stays visible */
+.exiting * {
+  transition: none !important;
+}
+
+.entering {
+  animation: page-enter var(--duration-page-enter) var(--ease-move) both;
+}
