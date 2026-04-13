@@ -52,10 +52,15 @@ export function ProjectCard({ project, span = 4, priority }: ProjectCardProps) {
         )}
       </div>
 
-      {/* Grid reveal lines — visible on hover */}
-      <div className={styles.gridOverlay} aria-hidden="true">
-        {Array.from({ length: span - 1 }).map((_, i) => (
-          <div key={i} className={styles.gridLine} />
+      {/* Grid reveal columns — visible on hover */}
+      {/* Explicit gutter tracks so hairlines land at gutter centers, not column edges */}
+      <div
+        className={styles.gridOverlay}
+        style={{ gridTemplateColumns: span > 1 ? `repeat(${span - 1}, 1fr var(--grid-gutter)) 1fr` : "1fr" }}
+        aria-hidden="true"
+      >
+        {Array.from({ length: span * 2 - 1 }).map((_, i) => (
+          <div key={i} className={i % 2 === 0 ? styles.gridCol : styles.gridGutter} />
         ))}
       </div>
     </Link>

@@ -1,0 +1,195 @@
+/* ─── Trigger button ─────────────────────────────────────────────────────── */
+.trigger {
+  position: fixed;
+  top: 10px;
+  right: var(--space-4);
+  z-index: 9999;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-text-subtle);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out);
+}
+
+.trigger:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.triggerActive {
+  color: var(--color-bg);
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.triggerActive:hover {
+  color: var(--color-bg);
+  opacity: 0.85;
+}
+
+/* ─── Ghost grid — permanent, always-on subtle guide ────────────────────── */
+.ghostGrid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  max-width: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+
+  display: grid;
+  grid-template-columns: repeat(11, 1fr var(--grid-gutter)) 1fr;
+}
+
+.ghostCol {
+  background: color-mix(in srgb, var(--color-text) 3%, transparent);
+  height: 100%;
+}
+
+/* Dashed hairline at center of each gutter zone — the true column divider */
+.ghostGutter {
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-text) 5%, transparent) 0px,
+    color-mix(in srgb, var(--color-text) 5%, transparent) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  background-size: 1px 8px;
+  background-position: 50% 0;
+  background-repeat: no-repeat repeat;
+}
+
+
+/* ─── Panel ──────────────────────────────────────────────────────────────── */
+.panel {
+  position: fixed;
+  top: 48px;
+  right: var(--space-4);
+  z-index: 9998;
+  width: 320px;
+  max-height: calc(100dvh - 64px);
+  overflow-y: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  box-shadow: 0 8px 32px color-mix(in srgb, #000 12%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  z-index: 1;
+}
+
+.panelTitle {
+  flex: 1;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+.refreshBtn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-subtle);
+  padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: transparent;
+  transition: color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+.refreshBtn:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+/* ─── Table ──────────────────────────────────────────────────────────────── */
+.table {
+  padding: var(--space-2) 0;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 3px var(--space-3);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.row:hover {
+  background: var(--color-bg-subtle);
+}
+
+.separator {
+  padding: var(--space-2) var(--space-3) 3px;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  border-top: 1px solid var(--color-border);
+  margin-block-start: var(--space-1);
+}
+
+.rowLabel {
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.spanBadge {
+  font-size: calc(var(--text-xs) * 0.85);
+  color: var(--color-text-subtle);
+  background: var(--color-bg-muted);
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.rowValue {
+  color: var(--color-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.unit {
+  color: var(--color-text-subtle);
+  margin-inline-start: 1px;
+}
+
+.rowExtra {
+  display: block;
+  font-size: calc(var(--text-xs) * 0.9);
+  color: var(--color-text-subtle);
+  text-align: right;
+  margin-block-start: 1px;
+}

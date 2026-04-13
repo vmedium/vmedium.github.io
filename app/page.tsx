@@ -7,7 +7,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
-      <div className={`${styles.gridRule} container`}>
+      <div className="container">
         <ProjectGrid projects={projects} layout="modular" />
       </div>
     </div>
